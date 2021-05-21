@@ -3,20 +3,22 @@
 namespace Spipu\Html2Pdf\Tests;
 
 use Phake;
+use PHPUnit\Framework\TestCase;
 use Spipu\Html2Pdf\CssConverter;
+use Spipu\Html2Pdf\Exception\HtmlParsingException;
 use Spipu\Html2Pdf\SvgDrawer;
 
 /**
  * Class Html2PdfTest
  */
-class SvgDrawerTest extends \PHPUnit_Framework_TestCase
+class SvgDrawerTest extends TestCase
 {
     /**
      * @var SvgDrawer
      */
     private $svgDrawer;
 
-    public function setUp()
+    public function setUp(): void
     {
         $myPdf = Phake::mock('Spipu\Html2Pdf\MyPdf');
 
@@ -28,10 +30,12 @@ class SvgDrawerTest extends \PHPUnit_Framework_TestCase
     /**
      * Test IsDrawing Exception
      *
-     * @expectedException \Spipu\Html2Pdf\Exception\HtmlParsingException
+     *
      */
     public function testIsDrawingException()
     {
+        $this->expectException(HtmlParsingException::class);
+
         $properties = [
             'x' => 0,
             'y' => 0,
